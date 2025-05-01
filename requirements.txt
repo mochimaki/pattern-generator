@@ -1,0 +1,4 @@
+flet[all]
+matplotlib
+numpy
+pandas

@@ -1,0 +1,11 @@
+{
+  "data_roots": ["csv_files", "pkl_files"],
+  "dependencies": {
+    "libraries": ["numpy", "pandas"],
+    "external_tools": []
+  },
+  "minimum_requirements": {
+    "python_version": "3.8",
+    "memory": "2GB"
+  }
+}
