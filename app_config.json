@@ -1,7 +1,7 @@
 {
   "data_roots": ["csv_files", "pkl_files"],
   "dependencies": {
-    "libraries": ["numpy", "pandas"],
+    "libraries": ["flet[all]", "matplotlib", "numpy", "pandas"],
     "external_tools": []
   },
   "minimum_requirements": {

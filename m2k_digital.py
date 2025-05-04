@@ -33,10 +33,10 @@ def load_containers_info(): # app_info.jsonからIPアドレスを読み込む
             global_m2k_ip = f"ip:{app_info['devices']['m2k']['target'][0]}"
     except Exception as e:
         print(f"Error loading settings: {e}")
-        global_m2k_ip = "ip:192.168.3.1"  # デフォルト値
+        global_m2k_ip = "ip:192.168.2.1"  # デフォルト値
 
 class M2KDigital:
-    def __init__(self, uri="ip:192.168.3.1"):
+    def __init__(self, uri="ip:192.168.2.1"):
         try:
             self.ctx = libm2k.m2kOpen(uri)
             if self.ctx is None:
