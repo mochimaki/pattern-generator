@@ -1,93 +1,93 @@
-# ADALM2000 パターンジェネレータ
+# ADALM2000 Pattern Generator
 
-ADALM2000を使用したデジタルパターンジェネレータアプリケーションです。最大16チャネルのデジタル信号パターンを生成し、ADALM2000を通じて出力することができます。
+A digital pattern generator application using ADALM2000. It can generate digital signal patterns for up to 16 channels and output them through ADALM2000.
 
-## 主な機能
+## Main Features
 
-- 最大16チャネルのデジタル信号パターン生成
-- グラフィカルなパターン編集インターフェース
-- パターンの保存と読み込み
-- CSV形式でのエクスポート/インポート
-- リアルタイムでのパターン再生
-- 繰り返し再生機能
-- チャネルごとの個別制御
+- Digital signal pattern generation for up to 16 channels
+- Graphical pattern editing interface
+- Pattern save and load functionality
+- CSV format export/import
+- Real-time pattern playback
+- Repeat playback functionality
+- Individual channel control
 
-## 必要条件
+## Requirements
 
-- Python 3.8以上
+- Python 3.8 or higher
 - ADALM2000
-- 以下のPythonパッケージ:
+- Required Python packages:
   - flet
   - pandas
   - libm2k
 
-## インストール方法
+## Installation
 
-1. 必要なパッケージをインストール:
+1. Install required packages:
 ```bash
 pip install -r requirements.txt
 ```
 
-2. ADALM2000をコンピュータに接続し、電源を投入します。
+2. Connect ADALM2000 to your computer and power it on.
 
-## 使用方法
+## Usage
 
-### 起動方法
+### Starting the Application
 
 ```bash
 python pattern_generator.py
 ```
 
-### 基本的な操作
+### Basic Operations
 
-1. **チャネル選択**
-   - 上部のドロップダウンメニューから編集するチャネルを選択します。
+1. **Channel Selection**
+   - Select the channel to edit from the dropdown menu at the top.
 
-2. **パターン編集**
-   - 状態（High/Low）と持続時間を設定し、「追加」ボタンでパターンを追加します。
-   - 既存のパターンを選択して編集、削除、コピーが可能です。
-   - 「挿入」ボタンで選択した行の上下に新しいパターンを挿入できます。
+2. **Pattern Editing**
+   - Set the state (High/Low) and duration, then click "Add" to add a pattern.
+   - Select existing patterns to edit, delete, or copy them.
+   - Use "Insert" buttons to add new patterns above or below the selected row.
 
-3. **パターンの保存と読み込み**
-   - メニューバーから「ファイル」→「保存」で現在のパターンを保存できます。
-   - 「ファイル」→「開く」で保存したパターンを読み込めます。
+3. **Pattern Save and Load**
+   - Save current patterns via "File" → "Save" in the menu bar.
+   - Load saved patterns via "File" → "Open".
 
-4. **パターンの再生**
-   - 「再生」ボタンをクリックしてパターンを出力します。
-   - サンプルレートや繰り返し回数を設定できます。
+4. **Pattern Playback**
+   - Click the "Play" button to output patterns.
+   - Configure sample rate and repeat count.
 
-5. **チャネル制御**
-   - 各チャネルのオン/オフを個別に制御できます。
-   - チャネルごとの出力値を直接設定することも可能です。
+5. **Channel Control**
+   - Enable/disable channels individually.
+   - Set output values directly for each channel.
 
-### 高度な機能
+### Advanced Features
 
-- **CSVエクスポート/インポート**
-  - パターンデータをCSV形式でエクスポート/インポートできます。
+- **CSV Export/Import**
+  - Export/import pattern data in CSV format.
 
-- **グラフ表示**
-  - パターンの波形をグラフで確認できます。
+- **Graph Display**
+  - View pattern waveforms in a graph.
 
-- **繰り返し再生**
-  - パターンを指定回数繰り返し再生できます。
-  - 無限ループ再生も可能です。
+- **Repeat Playback**
+  - Play patterns a specified number of times.
+  - Infinite loop playback is also possible.
 
-## 注意事項
+## Notes
 
-- ADALM2000が正しく接続されていない場合、アプリケーションは起動しません。
-- パターンの編集時は、必ず適切なサンプルレートを設定してください。
-- 大量のパターンデータを扱う場合は、パフォーマンスが低下する可能性があります。
+- The application will not start if ADALM2000 is not properly connected.
+- Always set an appropriate sample rate when editing patterns.
+- Performance may degrade when handling large amounts of pattern data.
 
-## トラブルシューティング
+## Troubleshooting
 
-1. **ADALM2000が認識されない場合**
-   - ADALM2000の接続を確認してください。
-   - デバイスのIPアドレスが正しく設定されているか確認してください。
+1. **ADALM2000 Not Recognized**
+   - Check ADALM2000 connection.
+   - Verify the device's IP address is correctly configured.
 
-2. **パターンが正しく出力されない場合**
-   - サンプルレートが適切に設定されているか確認してください。
-   - チャネルが有効になっているか確認してください。
+2. **Pattern Not Outputting Correctly**
+   - Check if the sample rate is properly set.
+   - Verify that channels are enabled.
 
-## ライセンス
+## License
 
-このプロジェクトはMITライセンスの下で公開されています。 
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details. 

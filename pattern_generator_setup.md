@@ -1,85 +1,85 @@
-# Pattern Generator 環境構築手順書
+# Pattern Generator Environment Setup Guide
 
-## 1. 概要
-Pattern Generatorアプリケーションを実行するための環境構築手順をまとめています。
+## 1. Overview
+This document outlines the environment setup procedure for running the Pattern Generator application.
 
-## 2. 前提条件
-- Anaconda3がインストールされていること
-- Windows 10以上の環境であること
+## 2. Prerequisites
+- Anaconda3 must be installed
+- Windows 10 or later environment
 
-## 3. 環境構築手順
+## 3. Environment Setup Procedure
 
-### 3.1. Conda環境の作成
+### 3.1. Creating Conda Environment
 ```bash
-# 新しい環境を作成（Python 3.11を使用）
+# Create a new environment (using Python 3.11)
 conda create -n pattern_generator python=3.11
 conda activate pattern_generator
 ```
 
-### 3.2. Fletパッケージのインストール
+### 3.2. Installing Flet Packages
 ```bash
-# Flet関連パッケージをインストール（バージョン0.26.0を指定）
-pip install flet-cli==0.26.0  # flet 0.26.0も同時にインストールされます
+# Install Flet-related packages (specify version 0.26.0)
+pip install flet-cli==0.26.0  # flet 0.26.0 will also be installed
 pip install flet-desktop==0.26.0
 pip install flet-web==0.26.0
 ```
 
-### 3.3. 必要なパッケージのインストール
+### 3.3. Installing Required Packages
 ```bash
-# conda-forgeチャンネルを使用して必要なパッケージをインストール
+# Install required packages using conda-forge channel
 conda install pandas matplotlib numpy libm2k -c conda-forge
 ```
 
-このコマンドで以下のパッケージとその依存関係がインストールされます：
+This command will install the following packages and their dependencies:
 - pandas
 - matplotlib
 - numpy
 - libm2k
-- その他の依存パッケージ（qt, mkl等）
+- Other dependency packages (qt, mkl, etc.)
 
-## 4. ディレクトリ構造の準備
-アプリケーションの実行には以下のディレクトリ構造が必要です：
+## 4. Directory Structure Preparation
+The application requires the following directory structure:
 
 ```
 project_directory/
-├── pattern_generator/        # アプリケーションルート（app root）
-│   ├── pattern_generator.py  # メインアプリケーション
-│   ├── chart_func.py         # チャート関連の関数
-│   ├── edit_operations.py    # 編集操作関連の関数
-│   ├── export_csv.py         # CSVエクスポート関連の関数
-│   ├── file_operations.py    # ファイル操作関連の関数
-│   ├── m2k_digital.py        # ADALM2000デバイス制御関連の関数
-│   └── view_operations.py    # ビュー操作関連の関数
-├── pkl_files/                # データルート（data root）の一部
-├── csv_files/                # データルート（data root）の一部
-└── app_info.json             # アプリケーション設定ファイル
+├── pattern_generator/        # Application root (app root)
+│   ├── pattern_generator.py  # Main application
+│   ├── chart_func.py         # Chart-related functions
+│   ├── edit_operations.py    # Edit operation functions
+│   ├── export_csv.py         # CSV export functions
+│   ├── file_operations.py    # File operation functions
+│   ├── m2k_digital.py        # ADALM2000 device control functions
+│   └── view_operations.py    # View operation functions
+├── pkl_files/                # Part of data root
+├── csv_files/                # Part of data root
+└── app_info.json             # Application configuration file
 ```
 
-### 4.1. ディレクトリ構造の説明
-このプロジェクトでは、アプリケーションとデータを明確に分離する設計を採用しています：
+### 4.1. Directory Structure Explanation
+This project adopts a design that clearly separates application and data:
 
-- **アプリケーションルート（app root）**
-  - `pattern_generator/`ディレクトリがアプリケーションルートとなります
-  - アプリケーションの実行に必要なすべてのPythonプログラムが格納されます
-  - メインプログラム（`pattern_generator.py`）と同じ名前を持つディレクトリです
+- **Application Root (app root)**
+  - The `pattern_generator/` directory serves as the application root
+  - Contains all Python programs required for application execution
+  - Directory name matches the main program (`pattern_generator.py`)
 
-- **データルート（data root）**
-  - `pkl_files/`と`csv_files/`ディレクトリがデータルートとなります
-  - アプリケーションがアクセスできる最上位の階層です
-  - プログラムはデータルートより上の階層にはアクセスできません
+- **Data Root**
+  - `pkl_files/` and `csv_files/` directories serve as the data root
+  - Represents the highest level hierarchy accessible to the application
+  - Programs cannot access levels above the data root
 
-この設計には以下の利点があります：
-- コンテナ環境での使用を想定しており、アプリケーションとデータのマウント方法を柔軟に制御できます
-- デスクトップアプリとして実行する場合も、シンボリックリンクでデータルートとアプリケーションルートの関係を作成できます
-- 同じ構造を持つ複数のプロジェクトを開発することで、複数のアプリケーションを連携するシステムを構築できます
+This design offers the following advantages:
+- Enables flexible control of mounting methods for applications and data in container environments
+- Allows creation of relationships between data root and application root using symbolic links when running as a desktop application
+- Facilitates building systems that integrate multiple applications by developing multiple projects with the same structure
 
-必要なディレクトリを作成：
+Create the required directories:
 ```bash
 mkdir pattern_generator pkl_files csv_files
 ```
 
-### 4.2. app_info.jsonの作成
-`app_info.json`はADALM2000デバイスの接続設定を格納するファイルです。以下の内容で作成してください：
+### 4.2. Creating app_info.json
+`app_info.json` stores connection settings for the ADALM2000 device. Create it with the following content:
 
 ```json
 {
@@ -91,45 +91,45 @@ mkdir pattern_generator pkl_files csv_files
 }
 ```
 
-このファイルはプロジェクトディレクトリの直下に配置してください。`target`のIPアドレスは、接続するADALM2000デバイスの実際のIPアドレスに変更してください。
+Place this file directly under the project directory. Change the IP address in `target` to match the actual IP address of your ADALM2000 device.
 
-## 5. 動作確認
+## 5. Verification
 ```bash
 cd pattern_generator
 python pattern_generator.py
 ```
 
-正常に起動すると以下のメッセージが表示されます：
+Upon successful startup, the following message will be displayed:
 ```bash
 Error loading settings: [Errno 2] No such file or directory: '../app_info.json'
-チャンネルリストが空です。空のチャートを返します。
+Channel list is empty. Returning empty chart.
 ```
-※これは初回起動時の正常なメッセージです。
+※This is a normal message for the first startup.
 
-## 6. 注意事項
-- Fletのバージョンは0.26.0を使用します（`Colors`属性の互換性のため）
-- パッケージのインストールはconda-forgeチャンネルを使用してください
-- `pkl_files`と`csv_files`ディレクトリは自動では作成されないため、手動で作成が必要です
-- `app_info.json`はリポジトリには含めず、ローカル環境で作成してください
-- すべてのPythonファイルは`pattern_generator`ディレクトリに配置する必要があります
-- アプリケーションはデータルートより上の階層にはアクセスできません
+## 6. Notes
+- Use Flet version 0.26.0 (for `Colors` attribute compatibility)
+- Install packages using the conda-forge channel
+- `pkl_files` and `csv_files` directories are not created automatically and must be created manually
+- `app_info.json` should not be included in the repository and should be created in the local environment
+- All Python files must be placed in the `pattern_generator` directory
+- The application cannot access levels above the data root
 
-## 7. トラブルシューティング
-- モジュールが見つからないエラーが発生した場合は、該当するパッケージを個別にインストールしてください
-- パス関連のエラーが発生した場合は、必要なディレクトリ構造が正しく作成されているか確認してください
-- ファイル操作で権限エラーが発生した場合は、ディレクトリのパーミッションを確認してください
-- ADALM2000デバイスに接続できない場合は、`app_info.json`のIPアドレスが正しいか確認してください
-- 必要なPythonファイルが`pattern_generator`ディレクトリに存在するか確認してください
-- データアクセスエラーが発生した場合は、データルートのディレクトリ構造を確認してください
+## 7. Troubleshooting
+- If a module not found error occurs, install the corresponding package individually
+- If path-related errors occur, verify that the required directory structure is correctly created
+- If permission errors occur during file operations, check directory permissions
+- If unable to connect to ADALM2000 device, verify the IP address in `app_info.json`
+- Verify that all required Python files exist in the `pattern_generator` directory
+- If data access errors occur, check the data root directory structure
 
-## 8. 参考情報
-- Flet公式ドキュメント: https://flet.dev/
+## 8. Reference Information
+- Flet Official Documentation: https://flet.dev/
 - Conda-forge: https://conda-forge.org/
-- Libm2k documentation: https://analogdevicesinc.github.io/libm2k/
+- Libm2k Documentation: https://analogdevicesinc.github.io/libm2k/
 
-## 9. 更新履歴
-- 2024-03-27: 初版作成
-- 2024-03-27: Fletパッケージのインストール手順を修正
-- 2024-05-03: app_info.jsonの設定内容を追加
-- 2024-05-04: ディレクトリ構造を正しい構成に修正
-- 2024-05-04: アプリケーションルートとデータルートの概念と目的について説明を追加
+## 9. Update History
+- 2024-03-27: Initial version created
+- 2024-03-27: Modified Flet package installation procedure
+- 2024-05-03: Added app_info.json configuration content
+- 2024-05-04: Corrected directory structure
+- 2024-05-04: Added explanation of application root and data root concepts and purposes
