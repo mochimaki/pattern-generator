@@ -14,9 +14,9 @@ def sort_channels_dialog(page, channel_to_display, channel_dropdown, dataframes,
         all_channels = [channel.text for channel in channel_dropdown.options]
         
         for channel in channel_to_display:
-            options = [ft.dropdown.Option(text=ch) for ch in channel_to_display]
+            options = [ft.DropdownOption(text=ch) for ch in channel_to_display]
             if channel != channel_dropdown.value:
-                options.append(ft.dropdown.Option(text="Hide"))
+                options.append(ft.DropdownOption(text="Hide"))
             channel_number = int(channel.split()[-1])
             color = channel_colors[channel_number % len(channel_colors)]
             dropdown = ft.Dropdown(
@@ -39,7 +39,7 @@ def sort_channels_dialog(page, channel_to_display, channel_dropdown, dataframes,
 
         add_channel_dropdown = ft.Dropdown(
             label="Channel to add",
-            options=[ft.dropdown.Option(text=channel) for channel in all_channels if channel not in channel_to_display and not dataframes[channel].empty],
+            options=[ft.DropdownOption(text=channel) for channel in all_channels if channel not in channel_to_display and not dataframes[channel].empty],
             hint_text="Select a channel",
         )
 
@@ -138,9 +138,9 @@ def update_channel_selection(existing_channels_dropdowns, temp_channel_to_displa
         temp_channel_to_display[jj] = existing_channels_dropdowns[jj].value
 
     for jj in range(len(channel_to_display)):   
-        options = [ft.dropdown.Option(text=ch) for ch in channel_to_display]
+        options = [ft.DropdownOption(text=ch) for ch in channel_to_display]
         if existing_channels_dropdowns[jj].value != channel_dropdown.value:
-            options.append(ft.dropdown.Option(text="Hide"))
+            options.append(ft.DropdownOption(text="Hide"))
         existing_channels_dropdowns[jj].options = options
         channel_number = int(existing_channels_dropdowns[jj].value.split()[-1])
         color = channel_colors[channel_number % len(channel_colors)]

@@ -281,7 +281,7 @@ def update_global_dataframes(loaded_dataframes, file_name): # ファイルを読
 
 def update_channel_dropdown():
     global channel_dropdown
-    channel_dropdown.options = [ft.dropdown.Option(text=f"Channel {i}") for i in range(16) if f"Channel {i}" in dataframes]
+    channel_dropdown.options = [ft.DropdownOption(text=f"Channel {i}") for i in range(16) if f"Channel {i}" in dataframes]
     channel_dropdown.value = None
     channel_dropdown_change(None, page)
 
@@ -649,7 +649,7 @@ def main(page_arg: ft.Page):
     # MenuBarをページに追加
     page.add(menubar)
     # Channel selection dropdown
-    dropdown_items = [ft.dropdown.Option(text=f"Channel {i}") for i in range(16)]
+    dropdown_items = [ft.DropdownOption(text=f"Channel {i}") for i in range(16)]
     channel_dropdown = ft.Dropdown(
         label="Channel",  # Updated label
         hint_text="Select channel",
@@ -663,8 +663,8 @@ def main(page_arg: ft.Page):
         width=150,
         label="State",  # Updated label
         options=[
-            ft.dropdown.Option(text="low"),
-            ft.dropdown.Option(text="high")
+            ft.DropdownOption(text="low"),
+            ft.DropdownOption(text="high")
         ],
         hint_text="Select state",
         on_change=lambda e: inputs_row_change(e, page)
@@ -685,9 +685,9 @@ def main(page_arg: ft.Page):
         width=150,
         label="Unit",  # Updated label
         options=[
-            ft.dropdown.Option(text="sec."),
-            ft.dropdown.Option(text="msec."),
-            ft.dropdown.Option(text="microsec.")
+            ft.DropdownOption(text="sec."),
+            ft.DropdownOption(text="msec."),
+            ft.DropdownOption(text="microsec.")
         ],
         hint_text="Select unit",
         on_change=lambda e: inputs_row_change(e, page)

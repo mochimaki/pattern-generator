@@ -42,14 +42,14 @@ def update_current_dir(page: ft.Page, new_dir: str):
         # UIの更新
         if directory_dropdown:
             directories = get_directory_hierarchy(str(base_dir), str(current_dir))
-            directory_dropdown.options = [ft.dropdown.Option(text=str(dir)) for dir in directories]
+            directory_dropdown.options = [ft.DropdownOption(text=str(dir)) for dir in directories]
             directory_dropdown.value = str(current_dir)
             directory_dropdown.label = str(current_dir)
         
         # ファイル一覧の更新
         if filename_dropdown and current_dir.exists():
             files = [f.name for f in current_dir.iterdir() if f.is_file() and f.suffix == '.csv']
-            filename_dropdown.options = [ft.dropdown.Option(text=file) for file in files]
+            filename_dropdown.options = [ft.DropdownOption(text=file) for file in files]
             filename_dropdown.value = None
             filename_dropdown.update()
         
@@ -217,7 +217,7 @@ def export_csv_dialog(page: ft.Page, dataframes: Dict[str, pd.DataFrame], on_exp
     
     directory_dropdown = ft.Dropdown(
         label=str(current_dir),
-        options=[ft.dropdown.Option(text=dir) for dir in directories],
+        options=[ft.DropdownOption(text=dir) for dir in directories],
         on_change=lambda e: update_current_dir(page, e.control.value),  # 直接値を渡す
         hint_text=str(current_dir),
     )
@@ -270,7 +270,7 @@ def close_dialog(page):
 def update_filename_options(directory, filename_dropdown):
     dir_path = Path(directory)
     files = [f.name for f in dir_path.iterdir() if f.is_file() and f.suffix == '.csv']
-    filename_dropdown.options = [ft.dropdown.Option(text=file) for file in files]
+    filename_dropdown.options = [ft.DropdownOption(text=file) for file in files]
 
 def delete_csv_dialog(page: ft.Page):
     global directory_dropdown, filename_dropdown, current_dir
@@ -290,7 +290,7 @@ def delete_csv_dialog(page: ft.Page):
             
         if dir_path.exists():
             files = [f.name for f in dir_path.iterdir() if f.is_file() and f.suffix == '.csv']
-            filename_dropdown.options = [ft.dropdown.Option(text=file) for file in files]
+            filename_dropdown.options = [ft.DropdownOption(text=file) for file in files]
             filename_dropdown.value = None
     
     def on_delete_click(e):
@@ -369,7 +369,7 @@ def delete_csv_dialog(page: ft.Page):
     
     directory_dropdown = ft.Dropdown(
         label=str(current_dir),
-        options=[ft.dropdown.Option(text=str(dir)) for dir in directories],
+        options=[ft.DropdownOption(text=str(dir)) for dir in directories],
         on_change=lambda e: update_current_dir(page, e.control.value),
         hint_text=str(current_dir),
         value=str(current_dir)

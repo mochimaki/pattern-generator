@@ -120,14 +120,14 @@ def update_current_dir(page: ft.Page, new_dir: str):
         # UIの更新
         if directory_dropdown:
             directories = get_directory_hierarchy(str(base_dir), str(current_dir))
-            directory_dropdown.options = [ft.dropdown.Option(text=str(dir)) for dir in directories]
+            directory_dropdown.options = [ft.DropdownOption(text=str(dir)) for dir in directories]
             directory_dropdown.value = str(current_dir)
             directory_dropdown.label = str(current_dir)
         
         # ファイル一覧の更新
         if filename_dropdown and current_dir.exists():
             files = [f.name for f in current_dir.iterdir() if f.is_file() and f.suffix == '.pkl']
-            filename_dropdown.options = [ft.dropdown.Option(text=file) for file in files]
+            filename_dropdown.options = [ft.DropdownOption(text=file) for file in files]
             filename_dropdown.value = None
             filename_dropdown.update()
         
@@ -206,7 +206,7 @@ def save_dialog(page: ft.Page, dataframes, on_save_callback=None):
     directories = get_directory_hierarchy("../pkl_files", current_dir)
     directory_dropdown = ft.Dropdown(
         label=str(current_dir),
-        options=[ft.dropdown.Option(text=str(dir)) for dir in directories],
+        options=[ft.DropdownOption(text=str(dir)) for dir in directories],
         on_change=lambda e: update_current_dir(page, e.control.value),
         hint_text=str(current_dir),
         value=str(current_dir)
@@ -253,7 +253,7 @@ def update_filename_options(directory, filename_dropdown):
     dir_path = Path(directory)
     files = [f.name for f in dir_path.iterdir() if f.is_file() and f.suffix == '.pkl']
     # filename_dropdownのオプションを更新
-    filename_dropdown.options = [ft.dropdown.Option(text=file) for file in files]
+    filename_dropdown.options = [ft.DropdownOption(text=file) for file in files]
 
 def load_dataframes(page, file_path, inputs_row, table_chart_row, channel_dropdown):
     global current_file, current_dir
@@ -264,7 +264,7 @@ def load_dataframes(page, file_path, inputs_row, table_chart_row, channel_dropdo
         
         inputs_row.visible = True
         table_chart_row.visible = True
-        channel_dropdown.options = [ft.dropdown.Option(text=f"Channel {i}") for i in range(16) if f"Channel {i}" in loaded_dataframes]
+        channel_dropdown.options = [ft.DropdownOption(text=f"Channel {i}") for i in range(16) if f"Channel {i}" in loaded_dataframes]
         channel_dropdown.value = None  # 値をリセット
         channel_dropdown.update()
         
@@ -299,7 +299,7 @@ def load_dialog(page: ft.Page, inputs_row, table_chart_row, channel_dropdown, on
     
     directory_dropdown = ft.Dropdown(
         label=str(current_dir),
-        options=[ft.dropdown.Option(text=dir) for dir in directories],
+        options=[ft.DropdownOption(text=dir) for dir in directories],
         on_change=lambda e: update_current_dir(page, e.control.value),  # 直接値を渡す
         hint_text=str(current_dir),
     )
@@ -361,7 +361,7 @@ def delete_pkl_dialog(page: ft.Page):
             
         if dir_path.exists():
             files = [f.name for f in dir_path.iterdir() if f.is_file() and f.suffix == '.pkl']
-            filename_dropdown.options = [ft.dropdown.Option(text=file) for file in files]
+            filename_dropdown.options = [ft.DropdownOption(text=file) for file in files]
             filename_dropdown.value = None
     
     def on_delete_click(e):
@@ -432,7 +432,7 @@ def delete_pkl_dialog(page: ft.Page):
     
     directory_dropdown = ft.Dropdown(
         label=str(current_dir),
-        options=[ft.dropdown.Option(text=str(dir)) for dir in directories],
+        options=[ft.DropdownOption(text=str(dir)) for dir in directories],
         on_change=lambda e: update_current_dir(page, e.control.value),
         hint_text=str(current_dir),
         value=str(current_dir)

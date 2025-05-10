@@ -713,7 +713,7 @@ def play_dialog(page: ft.Page, get_dataframes_func):
             width=500,  # ダイアログの幅を設定
             padding=20,  # コンテンツの内側の余白を追加
         ),
-        content_padding=ft.padding.all(0),  # ダイアログのデフォルトパディングを削除
+        content_padding=0,  # ダイアログのデフォルトパディングを削除
         actions=[
             ft.TextButton("Close", on_click=lambda _: close_dialog(page)),
         ],

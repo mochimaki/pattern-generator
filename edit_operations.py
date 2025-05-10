@@ -5,7 +5,7 @@ def copy_dataframe_dialog(page, channel_dropdown, dataframes, copy_dataframe):
     all_channels = [channel.text for channel in channel_dropdown.options]
     copy_channel_dropdown = ft.Dropdown(
         label="Copy from",
-        options=[ft.dropdown.Option(text=channel) for channel in all_channels if not dataframes[channel].empty and channel != channel_dropdown.value],
+        options=[ft.DropdownOption(text=channel) for channel in all_channels if not dataframes[channel].empty and channel != channel_dropdown.value],
         hint_text="Select a channel",
     )
     def on_copy_click(e):
