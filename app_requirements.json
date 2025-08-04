@@ -7,5 +7,12 @@
   "minimum_requirements": {
     "python_version": "3.8",
     "memory": "2GB"
+  },
+  "devices": {
+    "m2k": {
+      "num": "1:1:0",
+      "description": "Analog Devices ADALM2000",
+      "connection_type": "USB/Ethernet"
+    }
   }
 }
